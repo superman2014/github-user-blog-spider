@@ -1,18 +1,35 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
 
-/*
-|--------------------------------------------------------------------------
-| Console Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of your Closure based console
-| commands. Each Closure is bound to a command instance allowing a
-| simple approach to interacting with each command's IO methods.
-|
-*/
+Artisan::command('spider', function () {
+    // $cursorUserId = 1;
+    // while (true) {
+        // $users = GitHub::users()->all($cursorUserId);
+        // if (! $users) {
+            // break;
+        // }
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->describe('Display an inspiring quote');
+        // array_map(
+            // function ($item) {
+                // $user = GitHub::users()->show($item['login']);
+                // if ($user['followers'] > 100 && $user['blog']) {
+                    // echo $user['blog'].PHP_EOL;
+                // }
+            // }, $users
+        // );
+
+        // $userCount = count($users);
+        // $lastUser = $users[$userCount-1];
+
+        // $cursorUserId = $lastUser['id'];
+    // }
+
+    $qs = ['laravel', 'aliyun'];
+    array_map(
+        function ($item) {
+            $repos = GitHub::search()->repositories($item);
+            dd($repos);
+        },
+        $qs
+    );
+})->describe('spider users');
